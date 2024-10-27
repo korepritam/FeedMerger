@@ -8,10 +8,12 @@
 #ifndef GLOBALMEMBERS_H_
 #define GLOBALMEMBERS_H_
 
-class GlobalMembers {
-public:
-	GlobalMembers();
-	virtual ~GlobalMembers();
-};
+#include "FileManager.h"
+#include "ThreadWorker.h"
+
+void InitializeGlobalMembers();
+FileManager* GetFileManager();
+void SpawnThreadWorkers(int threadCount);
+void DestroyGlobalMembers();
 
 #endif /* GLOBALMEMBERS_H_ */

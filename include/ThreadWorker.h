@@ -8,10 +8,21 @@
 #ifndef THREADWORKER_H_
 #define THREADWORKER_H_
 
+#include "CommonStrctures.h"
+
 class ThreadWorker {
+	int tid;
+	vector<FilesMetadata> stockFiles;
+
 public:
-	ThreadWorker();
+	thread thread_obj;
+	ThreadWorker(int tid);
 	virtual ~ThreadWorker();
+	void insertStockFiles(FilesMetadata stockFile);
+	void clearStockFiles();
+	void Initialize();
+	void insertIntoMarketDataContainer();
+
 };
 
 #endif /* THREADWORKER_H_ */
