@@ -59,7 +59,12 @@ void SpawnThreadWorkers(int threadCount_)
 
 	}
 
-	MarketDataContainer::getInstance()->displayContainer();
+//	MarketDataContainer::getInstance()->displayContainer();
+}
+
+void DumpFeed()
+{
+	MarketDataContainer::getInstance()->popFromContainer();
 }
 
 void DestroyGlobalMembers()

@@ -6,6 +6,9 @@
  */
 
 #include "MarketDataContainer.h"
+#include "FileManager.h"
+
+extern FileManager *fm;
 
 MarketDataContainer* MarketDataContainer::obj = nullptr;
 mutex MarketDataContainer::mtx;
@@ -34,7 +37,18 @@ void MarketDataContainer::displayContainer()
 	{
 		MarketDataTick *tick= PQ.top();
 		PQ.pop();
-		cout << "timestamp:" << tick->timestamp << " symbol:" << tick->symbol << " sourceFileIndex:" << tick->sourceFileIndex << " Offset:" << tick->fileOffset << " Data:" << tick->data;
+		cout << "timestamp:" << tick->timestamp << " symbol:" << tick->symbol << " sourceFileIndex:" << tick->fileMetaData.filename << " Offset:" << tick->fileMetaData.fileOffset << " Data:" << tick->data;
+		delete tick;
+	}
+}
+
+void MarketDataContainer::popFromContainer()
+{
+	while(PQ.size())
+	{
+		MarketDataTick *tick= PQ.top();
+		PQ.pop();
+		fm->writeToFile(tick);
 		delete tick;
 	}
 }

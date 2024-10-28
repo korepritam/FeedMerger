@@ -9,9 +9,11 @@
 #define FILEMANAGER_H_
 
 #include "CommonStrctures.h"
+#include "MarketDataTick.h"
 
 class FileManager {
 	vector<FilesMetadata> StocksFileList;
+	FILE* outputFile = nullptr;
 
 public:
 	FileManager();
@@ -19,6 +21,7 @@ public:
 	void insertStockFiles(int stockFilesCount_, char** stockFilesList_);
 	int readStockFiles();
 	int readFile(FilesMetadata fileMetaData);
+	void writeToFile(MarketDataTick* tick);
 
 	inline const int GetStockFileListSize()			 		const {return StocksFileList.size();}
 	inline const vector<FilesMetadata>& getStocksFileList() const {return StocksFileList;}

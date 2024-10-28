@@ -10,7 +10,7 @@
 
 FileManager::FileManager()
 {
-
+	outputFile = fopen("MultiPlexedFile.txt","a");
 }
 
 FileManager::~FileManager()
@@ -50,6 +50,12 @@ int FileManager::readStockFiles()
 	return EXIT_SUCCESS;
 }
 
+void FileManager::writeToFile(MarketDataTick* tick)
+{
+	cout << "[" << __FUNCTION__ << "] " << tick->data;
+	readFile(tick->fileMetaData);
+}
+
 int FileManager::readFile(FilesMetadata fileMetaData)
 {
     FILE* file = fopen(fileMetaData.filename.c_str(), "r");
@@ -60,11 +66,12 @@ int FileManager::readFile(FilesMetadata fileMetaData)
     // Set line buffering
     setvbuf(file, NULL, _IOLBF, 0);
     char LINE[1024];
-    fgets(LINE, sizeof(LINE), file);
+
+    if(fileMetaData.fileOffset==0) fgets(LINE, sizeof(LINE), file);
+    else fseek(file, fileMetaData.fileOffset, SEEK_SET);  // Move to the saved offset
     memset(LINE,'\0',1024);
 
     if (fgets(LINE, sizeof(LINE), file) != NULL) {
-    	int sourceFileIndex = fileMetaData.fileNo;
     	char timestamp[13];
 		char symbol[10];
 		char data[1024];
@@ -74,8 +81,8 @@ int FileManager::readFile(FilesMetadata fileMetaData)
 //    	sscanf(LINE, "%c, %*c, %*c, %c, %*c", timestamp, symbol);
     	strcpy(data,LINE);
 
-//    	cout << LINE << endl;
-    	MarketDataTick *tick = new MarketDataTick(timestamp,symbol,data,sourceFileIndex,ftell(file));
+    	fileMetaData.fileOffset = ftell(file);
+    	MarketDataTick *tick = new MarketDataTick(timestamp,symbol,data,fileMetaData);
     	MarketDataContainer::getInstance()->pushToContainer(tick);
     }
 

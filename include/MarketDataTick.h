@@ -8,17 +8,16 @@
 #ifndef MARKETDATATICK_H_
 #define MARKETDATATICK_H_
 
-#include "StandardIncludes.h"
+#include "CommonStrctures.h"
 
 struct MarketDataTick {
     string timestamp;
     string symbol;
     string data;
-    int sourceFileIndex = 0; // Track which file this entry came from
-    long fileOffset = 0;
+    FilesMetadata fileMetaData;
 
 public:
-	MarketDataTick(string timestamp_, string symbol_, string data_, int sourceFileIndex_, long offset_);
+	MarketDataTick(string timestamp_, string symbol_, string data_, FilesMetadata fileMetaData_);
 	virtual ~MarketDataTick();
 
 	friend int compare(const MarketDataTick *a, const MarketDataTick *b);

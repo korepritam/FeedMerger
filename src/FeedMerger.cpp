@@ -18,6 +18,7 @@ int main(int argc, char** argv) {
 //	GetFileManager()->readStockFiles();
 	SpawnThreadWorkers(2);
 
+	DumpFeed();
 
 	DestroyGlobalMembers();
 	return 0;

@@ -15,5 +15,6 @@ void InitializeGlobalMembers();
 FileManager* GetFileManager();
 void SpawnThreadWorkers(int threadCount);
 void DestroyGlobalMembers();
+void DumpFeed();
 
 #endif /* GLOBALMEMBERS_H_ */
