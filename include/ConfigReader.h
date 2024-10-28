@@ -24,10 +24,10 @@ public:
 		return obj;
 	}
 
-	std::string getValueString(const std::string& key) const;
-	int getInt(const std::string& key) const;
-	float getFloat(const std::string& key) const;
-	void displayConfig() const;
+	string getValueString(string key);
+	int getInt(string key);
+	float getFloat(string key);
+	void displayConfig();
 	virtual ~ConfigReader();
 };
 

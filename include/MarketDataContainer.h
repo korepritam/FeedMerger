@@ -37,12 +37,11 @@ public:
 	MarketDataContainer(const MarketDataContainer& obj) = delete;
 	void operator=(const MarketDataContainer& obj) = delete;
 
-	static MarketDataContainer* getInstance() {
-//		mtx.lock();
+	static MarketDataContainer* getInstance()
+	{
 		if(obj == nullptr) {
 			obj = new MarketDataContainer();
 		}
-//		mtx.unlock();
 		return obj;
 	}
 
