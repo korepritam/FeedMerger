@@ -12,6 +12,7 @@
 #include "MarketDataTick.h"
 
 class FileManager {
+
 	vector<FilesMetadata> StocksFileList;
 	FILE* outputFile = nullptr;
 

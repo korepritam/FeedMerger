@@ -20,7 +20,20 @@ public:
 		}
 		else
 		{
-			return a->timestamp > b->timestamp;
+			int year1,month1,day1,hr1,min1,sec1,milli1;
+			int year2,month2,day2,hr2,min2,sec2,milli2;
+//			2021-03-05 10:00:00.134
+			sscanf(a->timestamp.c_str(),"%d-%d-%d %d:%d:%d.%d", &year1, &month1, &day1, &hr1, &min1, &sec1, &milli1);
+			sscanf(b->timestamp.c_str(),"%d-%d-%d %d:%d:%d.%d", &year2, &month2, &day2, &hr2, &min2, &sec2, &milli2);
+
+			return  year1 > year2 ? true :
+					month1 > month2 ? true :
+					day1 > day2 ? true :
+					hr1 > hr2 ? true :
+					min1 > min2 ? true :
+					sec1 > sec2 ? true :
+					milli1 > milli2 ? true : false;
+
 		}
 	}
 };

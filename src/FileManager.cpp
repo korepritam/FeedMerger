@@ -56,7 +56,6 @@ int FileManager::readStockFiles()
 void FileManager::writeToFile(MarketDataTick* tick)
 {
 	string dump_line = tick->fileMetaData.filename + ", " + tick->data;
-	cout << dump_line << endl;
 	if(fputs(dump_line.c_str(),outputFile) == EOF)
 	{
 		perror("Failed to write to File");
