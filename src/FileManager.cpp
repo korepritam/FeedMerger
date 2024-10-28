@@ -52,7 +52,12 @@ int FileManager::readStockFiles()
 
 void FileManager::writeToFile(MarketDataTick* tick)
 {
-	cout << "[" << __FUNCTION__ << "] " << tick->data;
+	if(fputs(tick->data.c_str(),outputFile) == EOF)
+	{
+		perror("Failed to write to File");
+		fclose(outputFile);
+		abort();
+	}
 	readFile(tick->fileMetaData);
 }
 
@@ -78,7 +83,6 @@ int FileManager::readFile(FilesMetadata fileMetaData)
 
     	//2021-03-05 10:00:00.123, 228.5, 120, NYSE, Ask
 		sscanf(LINE, "%*10s %12s, %*f, %*d, %9s, %*4s", timestamp, symbol);
-//    	sscanf(LINE, "%c, %*c, %*c, %c, %*c", timestamp, symbol);
     	strcpy(data,LINE);
 
     	fileMetaData.fileOffset = ftell(file);
