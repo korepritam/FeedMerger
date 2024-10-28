@@ -11,11 +11,14 @@
 FileManager::FileManager()
 {
 	outputFile = fopen("MultiPlexedFile.txt","a");
+	cout << "FileManager Created" << endl;
 }
 
 FileManager::~FileManager()
 {
-
+	fclose(outputFile);
+	outputFile = nullptr;
+	cout << "FileManager Destroyed" << endl;
 }
 
 void FileManager::insertStockFiles(int stockFilesCount_, char** stockFilesList_)
@@ -24,7 +27,7 @@ void FileManager::insertStockFiles(int stockFilesCount_, char** stockFilesList_)
 	{
 		StocksFileList.push_back({stockFilesList_[i],i});
 	}
-	cout << "argc:" << stockFilesCount_ << " size:" << StocksFileList.size() << endl;
+	cout << "Total Stock Files:" << StocksFileList.size() << endl;
 }
 
 int FileManager::readStockFiles()
@@ -38,9 +41,9 @@ int FileManager::readStockFiles()
         }
         // Set line buffering
         setvbuf(files, NULL, _IOLBF, 0);
-        char LINE[1024];
+        char LINE[MAX_LINE_LEN];
         fgets(LINE, sizeof(LINE), files);
-        memset(LINE,'\0',1024);
+        memset(LINE,'\0',MAX_LINE_LEN);
 
         if (fgets(LINE, sizeof(LINE), files) != NULL)
         {
@@ -70,16 +73,16 @@ int FileManager::readFile(FilesMetadata fileMetaData)
     }
     // Set line buffering
     setvbuf(file, NULL, _IOLBF, 0);
-    char LINE[1024];
+    char LINE[MAX_LINE_LEN];
 
     if(fileMetaData.fileOffset==0) fgets(LINE, sizeof(LINE), file);
     else fseek(file, fileMetaData.fileOffset, SEEK_SET);  // Move to the saved offset
-    memset(LINE,'\0',1024);
+    memset(LINE,'\0',MAX_LINE_LEN);
 
     if (fgets(LINE, sizeof(LINE), file) != NULL) {
-    	char timestamp[13];
-		char symbol[10];
-		char data[1024];
+    	char timestamp[TIMESTAMP_LEN];
+		char symbol[SYMBOL_LEN];
+		char data[MAX_LINE_LEN];
 
     	//2021-03-05 10:00:00.123, 228.5, 120, NYSE, Ask
 		sscanf(LINE, "%*10s %12s, %*f, %*d, %9s, %*4s", timestamp, symbol);

@@ -1,1 +1,18 @@
-argc:10000 size:10000
+[FeedMerger.cfg] =>
+BATCH_FILE_SIZE = 50
+THREAD_WORKERS = 5
+
+Total Stock Files:10000
+ThreadWorker Created [0]
+ThreadWorker Created [1]
+ThreadWorker Created [2]
+ThreadWorker Created [3]
+ThreadWorker Created [4]
+FileManager Destroyed
+ThreadWorker Destroyed [0]
+ThreadWorker Destroyed [1]
+ThreadWorker Destroyed [2]
+ThreadWorker Destroyed [3]
+ThreadWorker Destroyed [4]
+Global Member Destroyed Successfully
+FeedMerger End Successfully :)

@@ -3,6 +3,11 @@
 
 #include "StandardIncludes.h"
 
+#define MAX_LINE_LEN 1024
+#define SYMBOL_LEN 10
+#define TIMESTAMP_LEN 13
+
+
 struct FilesMetadata {
 	string filename;
 	int fileNo;

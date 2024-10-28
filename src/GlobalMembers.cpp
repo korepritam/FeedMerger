@@ -5,6 +5,7 @@
  *      Author: pritam
  */
 
+#include "ConfigReader.h"
 #include "GlobalMembers.h"
 #include "MarketDataContainer.h"
 
@@ -14,23 +15,29 @@ int threadCount = 0;
 
 void InitializeGlobalMembers()
 {
+	ConfigReader::getInstance("FeedMerger.cfg");
 	fm = new FileManager();
-	threadCount = 2;
+	threadCount = ConfigReader::getInstance()->getInt("THREAD_WORKERS");
+
+	if(threadCount <= 0) {
+		cout << "Thread Count cannot be <= 0" << endl;
+		abort();
+	}
+
 	threadWorkers = new ThreadWorker*[threadCount];
 }
 
 FileManager* GetFileManager()	{return fm;}
 
-void SpawnThreadWorkers(int threadCount_)
+void SpawnThreadWorkers()
 {
-//	threadCount = threadCount_;
 	for(int thead_idx = 0; thead_idx < threadCount; thead_idx++)
 	{
 		ThreadWorker *t = new ThreadWorker(thead_idx);
 		threadWorkers[thead_idx] = t;
 	}
 
-	int file_batch_size = 50;
+	int file_batch_size = ConfigReader::getInstance()->getInt("BATCH_FILE_SIZE");
 	for(int i=0; i<fm->GetStockFileListSize(); i+=file_batch_size)
 	{
 		for(int j=0; j<file_batch_size && (i+j) < fm->GetStockFileListSize(); j++)
@@ -76,4 +83,6 @@ void DestroyGlobalMembers()
 		delete threadWorkers[thread_idx];
 		threadWorkers[thread_idx] = nullptr;
 	}
+	threadWorkers = nullptr;
+	cout << "Global Member Destroyed Successfully" << endl;
 }

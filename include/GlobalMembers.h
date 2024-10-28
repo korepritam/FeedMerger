@@ -13,7 +13,7 @@
 
 void InitializeGlobalMembers();
 FileManager* GetFileManager();
-void SpawnThreadWorkers(int threadCount);
+void SpawnThreadWorkers();
 void DestroyGlobalMembers();
 void DumpFeed();
 

@@ -10,9 +10,9 @@
 
 extern FileManager *fm;
 
-ThreadWorker::ThreadWorker(int tid_):tid(tid_)
+ThreadWorker::ThreadWorker(int tid_):thrId(tid_)
 {
-
+	cout << "ThreadWorker Created [" << thrId << "]" << endl;
 }
 
 ThreadWorker::~ThreadWorker()
@@ -21,6 +21,7 @@ ThreadWorker::~ThreadWorker()
 	{
 		thread_obj.join();
 	}
+	cout << "ThreadWorker Destroyed [" << thrId << "]" << endl;
 }
 
 void ThreadWorker::insertStockFiles(FilesMetadata stockFileMetadata)
@@ -40,8 +41,8 @@ void ThreadWorker::Initialize()
 void ThreadWorker::insertIntoMarketDataContainer()
 {
 	//read one line from file and insert
-//	cout << "***** Started *****" << endl;
 	for(auto file:stockFiles)
+	{
 		fm->readFile(file);
-//	cout << "***** Finished *****" << endl;
+	}
 }

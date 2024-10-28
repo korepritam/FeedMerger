@@ -16,10 +16,11 @@ int main(int argc, char** argv) {
 	InitializeGlobalMembers();
 	GetFileManager()->insertStockFiles(stocksCount,stockFiles);
 //	GetFileManager()->readStockFiles();
-	SpawnThreadWorkers(2);
-
+	SpawnThreadWorkers();
 	DumpFeed();
-
 	DestroyGlobalMembers();
+
+	cout << "FeedMerger End Successfully :)" << endl;
+
 	return 0;
 }
