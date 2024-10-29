@@ -12,15 +12,13 @@
 
 struct MarketDataTick {
     string timestamp;
-    string symbol;
+    string exchange;
     string data;
     FilesMetadata fileMetaData;
 
 public:
-	MarketDataTick(string timestamp_, string symbol_, string data_, FilesMetadata fileMetaData_);
+	MarketDataTick(string timestamp_, string exchange_, string data_, FilesMetadata fileMetaData_);
 	virtual ~MarketDataTick();
-
-	friend int compare(const MarketDataTick *a, const MarketDataTick *b);
 };
 
 #endif /* MARKETDATATICK_H_ */

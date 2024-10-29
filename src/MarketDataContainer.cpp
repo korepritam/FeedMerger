@@ -15,9 +15,9 @@ mutex MarketDataContainer::mtx;
 
 void MarketDataContainer::pushToContainer(MarketDataTick *tick_)
 {
-	mtx.lock();
+	//Multithreading Protection
+	lock_guard<mutex> lock(mtx);
 	PQ.push(tick_);
-	mtx.unlock();
 }
 
 MarketDataContainer::MarketDataContainer()
@@ -29,17 +29,6 @@ MarketDataContainer::MarketDataContainer()
 MarketDataContainer::~MarketDataContainer()
 {
 
-}
-
-void MarketDataContainer::displayContainer()
-{
-	while(PQ.size())
-	{
-		MarketDataTick *tick= PQ.top();
-		PQ.pop();
-		cout << "timestamp:" << tick->timestamp << " symbol:" << tick->symbol << " sourceFileIndex:" << tick->fileMetaData.filename << " Offset:" << tick->fileMetaData.fileOffset << " Data:" << tick->data;
-		delete tick;
-	}
 }
 
 void MarketDataContainer::popFromContainer()

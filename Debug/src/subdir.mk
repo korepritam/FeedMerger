@@ -38,7 +38,7 @@ OBJS += \
 src/%.o: ../src/%.cpp src/subdir.mk
 	@echo 'Building file: $<'
 	@echo 'Invoking: Cross G++ Compiler'
-	g++ -std=c++17 -I"/Users/pritam/git/FeedMerger/include" -I"/Users/pritam/git/FeedMerger/Tests" -I/Users/pritam/git-workspace/googletestlib/include -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$@" -o "$@" "$<"
+	g++ -std=c++17 -UUNIT_TESTING -I"/Users/pritam/git/FeedMerger/include" -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$@" -o "$@" "$<"
 	@echo 'Finished building: $<'
 	@echo ' '
 

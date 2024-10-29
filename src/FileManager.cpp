@@ -10,7 +10,7 @@
 
 FileManager::FileManager()
 {
-	outputFile = fopen("MultiPlexedFile.txt","a");
+	outputFile = fopen("MultiPlexedFile.txt","w");
 	cout << "FileManager Created" << endl;
 }
 
@@ -36,6 +36,7 @@ int FileManager::readStockFiles()
 	{
         FILE* files = fopen(StocksFileList[i].filename.c_str(), "r");
         if (!files) {
+        	cout << StocksFileList[i].filename << endl;
             perror("Failed to open file");
             return EXIT_FAILURE;
         }
@@ -45,7 +46,7 @@ int FileManager::readStockFiles()
         fgets(LINE, sizeof(LINE), files);
         memset(LINE,'\0',MAX_LINE_LEN);
 
-        if (fgets(LINE, sizeof(LINE), files) != NULL)
+        while (fgets(LINE, sizeof(LINE), files) != NULL)
         {
         	cout << LINE;
         }
@@ -76,21 +77,24 @@ int FileManager::readFile(FilesMetadata fileMetaData)
     setvbuf(file, NULL, _IOLBF, 0);
     char LINE[MAX_LINE_LEN];
 
+    //skip the first line (Timestamp, Price, Size, Exchange, Type)
     if(fileMetaData.fileOffset==0) fgets(LINE, sizeof(LINE), file);
     else fseek(file, fileMetaData.fileOffset, SEEK_SET);  // Move to the saved offset
+
     memset(LINE,'\0',MAX_LINE_LEN);
 
     if (fgets(LINE, sizeof(LINE), file) != NULL) {
     	char timestamp[TIMESTAMP_LEN];
-		char symbol[SYMBOL_LEN];
+		char exchange[EXCHANGE_LEN];
 		char data[MAX_LINE_LEN];
 
     	//2021-03-05 10:00:00.123, 228.5, 120, NYSE, Ask
-		sscanf(LINE, "%*10s %12s, %*f, %*d, %9s, %*4s", timestamp, symbol);
+//		sscanf(LINE, "%*10s %12s, %*f, %*d, %9s, %*4s", timestamp, exchange);
+		sscanf(LINE, "%29[^,], %*f, %*d, %9[^,], %*3s", timestamp, exchange);
     	strcpy(data,LINE);
 
     	fileMetaData.fileOffset = ftell(file);
-    	MarketDataTick *tick = new MarketDataTick(timestamp,symbol,data,fileMetaData);
+    	MarketDataTick *tick = new MarketDataTick(timestamp,exchange,data,fileMetaData);
     	MarketDataContainer::getInstance()->pushToContainer(tick);
     }
 

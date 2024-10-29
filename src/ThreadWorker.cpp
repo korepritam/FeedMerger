@@ -38,6 +38,7 @@ void ThreadWorker::Initialize()
 {
 	thread_obj = thread(&ThreadWorker::insertIntoMarketDataContainer, this);
 }
+
 void ThreadWorker::insertIntoMarketDataContainer()
 {
 	//read one line from file and insert

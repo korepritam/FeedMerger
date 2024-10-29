@@ -64,7 +64,7 @@ main-build: FeedMerger
 FeedMerger: $(OBJS) $(USER_OBJS) makefile $(OPTIONAL_TOOL_DEPS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: Cross G++ Linker'
-	g++ -L/Users/pritam/git-workspace/googletestlib/make -o "FeedMerger" $(OBJS) $(USER_OBJS) $(LIBS) -lpthread -lgtest
+	g++  -o "FeedMerger" $(OBJS) $(USER_OBJS) $(LIBS) -lpthread
 	@echo 'Finished building target: $@'
 	@echo ' '
 

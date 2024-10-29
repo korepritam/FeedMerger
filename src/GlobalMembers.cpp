@@ -51,7 +51,7 @@ void SpawnThreadWorkers()
 			threadWorkers[thread_idx]->Initialize();
 		}
 
-		//wait for the 16 threads to complete
+		//wait for the threadCount threads to complete
 		for(int thread_idx = 0; thread_idx < threadCount; thread_idx++)
 		{
 			if(threadWorkers[thread_idx]->thread_obj.joinable()) {
@@ -65,8 +65,6 @@ void SpawnThreadWorkers()
 		}
 
 	}
-
-//	MarketDataContainer::getInstance()->displayContainer();
 }
 
 void DumpFeed()

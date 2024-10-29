@@ -16,18 +16,18 @@ public:
 	bool operator()(MarketDataTick *a, MarketDataTick *b) {
 		if(a->timestamp == b->timestamp)
 		{
-			return a->symbol>b->symbol;
+			return a->exchange > b->exchange;
 		}
 		else
 		{
-			int year1,month1,day1,hr1,min1,sec1,milli1;
-			int year2,month2,day2,hr2,min2,sec2,milli2;
-//			2021-03-05 10:00:00.134
-			sscanf(a->timestamp.c_str(),"%d-%d-%d %d:%d:%d.%d", &year1, &month1, &day1, &hr1, &min1, &sec1, &milli1);
-			sscanf(b->timestamp.c_str(),"%d-%d-%d %d:%d:%d.%d", &year2, &month2, &day2, &hr2, &min2, &sec2, &milli2);
+			int year1,mon1,day1,hr1,min1,sec1,milli1;
+			int year2,mon2,day2,hr2,min2,sec2,milli2;
+
+			sscanf(a->timestamp.c_str(),"%4d-%2d-%2d %2d:%2d:%2d.%3d", &year1, &mon1, &day1, &hr1, &min1, &sec1, &milli1);
+			sscanf(b->timestamp.c_str(),"%4d-%2d-%2d %2d:%2d:%2d.%3d", &year2, &mon2, &day2, &hr2, &min2, &sec2, &milli2);
 
 			return  year1 > year2 ? true :
-					month1 > month2 ? true :
+					mon1 > mon2 ? true :
 					day1 > day2 ? true :
 					hr1 > hr2 ? true :
 					min1 > min2 ? true :
@@ -52,6 +52,8 @@ public:
 
 	static MarketDataContainer* getInstance()
 	{
+		//Multithreading Protection
+		lock_guard<mutex> lock(mtx);
 		if(obj == nullptr) {
 			obj = new MarketDataContainer();
 		}
@@ -59,7 +61,6 @@ public:
 	}
 
 	void pushToContainer(MarketDataTick *tick_);
-	void displayContainer();
 	void popFromContainer();
 };
 

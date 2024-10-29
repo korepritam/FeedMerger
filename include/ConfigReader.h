@@ -16,7 +16,12 @@ class ConfigReader {
 
 	static ConfigReader* obj;
 	ConfigReader(string filename);
+
 public:
+
+	ConfigReader(const ConfigReader& obj) = delete;
+	void operator=(const ConfigReader& obj) = delete;
+
 	static ConfigReader* getInstance(string filename="") {
 		if(obj==nullptr) {
 			obj = new ConfigReader(filename);
