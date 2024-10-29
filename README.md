@@ -14,9 +14,20 @@ FeedMerger is a C++ program designed to efficiently merge market data from multi
 - **C++11 or higher**: The code is written in modern C++ and requires a compatible compiler.
 - **Standard Libraries**: The program uses standard libraries like `<iostream>`, `<cstdio>`, `<cstring>`, `<vector>`, `<queue>`, `<thread>`, and the **pthread** library for multithreading.
   
-## Installation
+## Git Installation**: 
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/yourusername/FeedMerger.git
-   cd FeedMerger
+git clone https://github.com/korepritam/FeedMerger.git
+
+## Makefile & Run Script
+  
+  _This is an Eclipse Project built on MacOS_
+- **makefile location**: build/Makefile
+- **EXE name: FeedMerger**
+- **Command to build exe**: ```cd build && make clean && make -j all```
+- **Script**: RUN_EXE/Start.sh
+- **Output file**: MultiPlexedFile.txt
+
+## Configuration File 
+  _(FeedMerger.cfg)_
+1. THREAD_WORKERS=5 _(number of Threads spwan for reading file)_
+2. BATCH_FILE_SIZE=100 _(Number of files read simultaneously)_
