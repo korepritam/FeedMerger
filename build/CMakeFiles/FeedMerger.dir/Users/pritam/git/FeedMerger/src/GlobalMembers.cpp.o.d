@@ -1,7 +1,6 @@
-CMakeFiles/FeedMerger.dir/src/MarketDataContainer.cpp.o: \
-  /Users/pritam/git/FeedMerger/src/MarketDataContainer.cpp \
-  /Users/pritam/git/FeedMerger/include/MarketDataContainer.h \
-  /Users/pritam/git/FeedMerger/include/CommonStrctures.h \
+CMakeFiles/FeedMerger.dir/Users/pritam/git/FeedMerger/src/GlobalMembers.cpp.o: \
+  /Users/pritam/git/FeedMerger/src/GlobalMembers.cpp \
+  /Users/pritam/git/FeedMerger/include/ConfigReader.h \
   /Users/pritam/git/FeedMerger/include/StandardIncludes.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk/usr/include/c++/v1/iostream \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk/usr/include/c++/v1/__assert \
@@ -1013,5 +1012,9 @@ CMakeFiles/FeedMerger.dir/src/MarketDataContainer.cpp.o: \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk/usr/include/sys/_select.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk/usr/include/sys/_types/_uuid_t.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk/usr/include/gethostuuid.h \
+  /Users/pritam/git/FeedMerger/include/GlobalMembers.h \
+  /Users/pritam/git/FeedMerger/include/FileManager.h \
+  /Users/pritam/git/FeedMerger/include/CommonStrctures.h \
   /Users/pritam/git/FeedMerger/include/MarketDataTick.h \
-  /Users/pritam/git/FeedMerger/include/FileManager.h
+  /Users/pritam/git/FeedMerger/include/ThreadWorker.h \
+  /Users/pritam/git/FeedMerger/include/MarketDataContainer.h
