@@ -16,15 +16,14 @@ FeedMerger is a C++ program designed to efficiently merge market data from multi
   
 ## Git Installation**: 
 
-git clone https://github.com/korepritam/FeedMerger.git
+```git clone https://github.com/korepritam/FeedMerger.git```
 
-## Makefile & Run Script
-  
-  _This is an Eclipse Project built on MacOS_
-- **makefile location**: build/Makefile
-- **EXE name: FeedMerger**
-- **Command to build exe**: ```cd build && make clean && make -j all```
-- **Script**: RUN_EXE/Start.sh
+## Build 
+ ```cd FeedMerger && make clean && make```
+
+## Run
+```cd RUN_EXE && ./Start.sh```
+- EXE name: bin/FeedMerger
 - **Output file**: MultiPlexedFile.txt
 
 ## Configuration File 
