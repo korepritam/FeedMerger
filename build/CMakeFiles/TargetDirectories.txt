@@ -1,3 +1,0 @@
-/Users/pritam/FeedMerger/build/CMakeFiles/FeedMerger.dir
-/Users/pritam/FeedMerger/build/CMakeFiles/edit_cache.dir
-/Users/pritam/FeedMerger/build/CMakeFiles/rebuild_cache.dir
